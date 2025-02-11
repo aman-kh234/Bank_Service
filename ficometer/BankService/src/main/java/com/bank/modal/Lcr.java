@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Llr {
+public class Lcr {
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "llr_seq")
-    @SequenceGenerator(name = "llr_seq", sequenceName = "llr_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lcr_seq")
+    @SequenceGenerator(name = "lcr_seq", sequenceName = "lcr_sequence", allocationSize = 1)
     private int id;
 	
 	private double Hqla;

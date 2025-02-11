@@ -1,6 +1,9 @@
 package com.bank.modal;
 
 import java.time.LocalDate;
+import java.util.List;
+
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +21,6 @@ public class CustomerDto {
 	
 	private String occupation;	
 	private double income;
+	private List<CreditAccountDto> creditAccount;
+	private List<CreditEnqueriesDto> creditEnqueries;
 }
