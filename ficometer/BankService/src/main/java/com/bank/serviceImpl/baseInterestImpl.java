@@ -1,5 +1,7 @@
 package com.bank.serviceImpl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +41,10 @@ public class baseInterestImpl implements baseInterest{
 		}
 	}
 
-	
+	@Override
+    public BaseInterest getLatestBaseInterest() {
+        // Assuming only one record exists or fetching the latest one
+        Optional<BaseInterest> latestInterest = baseInterestRepository.findTopByOrderByIdDesc();
+        return latestInterest.orElse(null);
+    }
 }

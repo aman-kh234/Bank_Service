@@ -1,5 +1,7 @@
 package com.bank.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.modal.Lcr;
+import com.bank.modal.Npa;
 import com.bank.service.lcrService;
 
 @RestController
@@ -37,4 +40,9 @@ public class lcrController {
 	public void deleteLcr(@PathVariable int id) {
 		lcrServiceImpl.deleteLcr(id);
 	}
+	
+	 @GetMapping("/calculate/lcr/months/{n}")
+	    public List<Lcr> calculateAllLcr(@PathVariable int n) {
+	        return lcrServiceImpl.allLcr(n);
+	    }
 }

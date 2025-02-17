@@ -1,5 +1,7 @@
 package com.bank.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +39,11 @@ public class NsfrServiceImpl implements NsfrService{
 	@Override
 	public void deleteNsfr(int id) {
 		NsfrRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Nsfr> allNsfr(int n) {
+		return NsfrRepository.getNsfrByMonthPeriod(n);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.bank.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,4 +40,9 @@ public class CarServiceImpl implements CarService {
     public void deleteCar(int id) {
         carRepository.deleteById(id);
     }
+
+	@Override
+	public List<Car> allCar(int n) {
+		return carRepository.getCarByMonthPeriod(n);
+	}
 }

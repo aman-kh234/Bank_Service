@@ -1,5 +1,7 @@
 package com.bank.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,11 @@ public class NpaServiceImpl implements NpaService{
 	@Override
 	public void deleteNpa(int id) {
 		npaRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Npa> allNpa(int n) {
+		return npaRepository.getNpaByMonthPeriod(n);
 	}
 	
 }

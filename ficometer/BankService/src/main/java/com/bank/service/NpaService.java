@@ -1,5 +1,7 @@
 package com.bank.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.bank.modal.Npa;
@@ -10,4 +12,5 @@ public interface NpaService {
     public double calculateNpa(Npa npa);
     public Npa getNpaByPeriod();
     public void deleteNpa(int id);
+    public List<Npa> allNpa(int n);
 }
