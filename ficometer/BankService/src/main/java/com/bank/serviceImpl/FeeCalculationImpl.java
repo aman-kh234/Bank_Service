@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.bank.modal.BaseInterest;
 import com.bank.modal.Loan;
+import com.bank.service.CustomerService;
 import com.bank.service.FeeCalculationService;
 import com.bank.service.baseInterest;
 
@@ -13,8 +14,10 @@ public class FeeCalculationImpl implements FeeCalculationService{
 
 	@Autowired 
 	private baseInterest baseInterestService;
-
-	 public static double calculateRiskIndex(double creditUtilizationRatio, int delayedPayments, int creditScore) {
+    @Autowired
+    private CustomerService cs;
+    
+	 public static double calculateRiskIndex(double creditUtilizationRatio, int delayedPayments, double creditScore) {
 	        // Weights
 	        double w1 = 0.4;
 	        double w2 = 0.3;
@@ -39,13 +42,13 @@ public class FeeCalculationImpl implements FeeCalculationService{
 	    
 	@Override
 	public double fee_calculated(Loan loan) {
-		  double loanAmount = loan.getLoanAmount(); 
+		    double loanAmount = loan.getLoanAmount(); 
 	        int loanTenureMonths = loan.getTenure();
 	        double baseInterestRate = baseInterestService.getLatestBaseInterest().getFixedInterest();
 	        double riskPremiumFactor = baseInterestService.getLatestBaseInterest().getRiskPremium(); 
-	        double creditUtilizationRatio = 0.6; 
-	        int delayedPayments = 3;
-	        int creditScore = 650;
+	        double creditUtilizationRatio = cs.getCreditUtilizationScore(loan.getCustomerId()); 
+	        int delayedPayments = cs.calculateDelayedPayment(loan.getCustomerId());
+	        double creditScore = cs.getTotalCreditScore(loan.getCustomerId());
 
 	        //Calculate Risk Index
 	        double riskIndex = calculateRiskIndex(creditUtilizationRatio, delayedPayments, creditScore);

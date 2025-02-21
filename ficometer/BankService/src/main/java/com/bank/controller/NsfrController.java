@@ -18,12 +18,12 @@ import com.bank.service.NsfrService;
 import com.bank.service.lcrService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/nsfr")
 public class NsfrController {
 	@Autowired
 	private NsfrService NsfrServiceImpl;
 	
-	@PostMapping("/add/nsfr")
+	@PostMapping("/add")
 	public Nsfr addnsfr(@RequestBody Nsfr nsfr) {
 		return NsfrServiceImpl.addNsfr(nsfr);
 	}
@@ -33,17 +33,17 @@ public class NsfrController {
 		return NsfrServiceImpl.getNsfrByPeriod();
 	}
 	
-	@GetMapping("/calculate/nsfr/latest")
+	@GetMapping("/calculate/latest")
 	public double calculateNsfrLatest(){
 		return NsfrServiceImpl.calculateNsfr(getByPeriod());
 	}
 	
-	@DeleteMapping("/delete/nsfr/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void deleteNsfr(@PathVariable int id) {
 		NsfrServiceImpl.deleteNsfr(id);
 	}
 	
-	 @GetMapping("/calculate/nsfr/months/{n}")
+	 @GetMapping("/calculate/months/{n}")
 	    public List<Nsfr> calculateAllNsfr(@PathVariable int n) {
 	        return NsfrServiceImpl.allNsfr(n);
 	    }

@@ -16,12 +16,12 @@ import com.bank.modal.Npa;
 import com.bank.service.lcrService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/lcr")
 public class lcrController {
 	@Autowired
 	private lcrService lcrServiceImpl;
 	
-	@PostMapping("/add/lcr")
+	@PostMapping("/add")
 	public Lcr addLcr(@RequestBody Lcr lcr) {
 		return lcrServiceImpl.addLcr(lcr);
 	}
@@ -31,17 +31,17 @@ public class lcrController {
 		return lcrServiceImpl.getLcrByPeriod();
 	}
 	
-	@GetMapping("/calculate/lcr/latest")
+	@GetMapping("/calculate/latest")
 	public double calculateLcrLatest(){
 		return lcrServiceImpl.calculateLcr(getByPeriod());
 	}
 	
-	@DeleteMapping("/delete/lcr/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void deleteLcr(@PathVariable int id) {
 		lcrServiceImpl.deleteLcr(id);
 	}
 	
-	 @GetMapping("/calculate/lcr/months/{n}")
+	 @GetMapping("/calculate/months/{n}")
 	    public List<Lcr> calculateAllLcr(@PathVariable int n) {
 	        return lcrServiceImpl.allLcr(n);
 	    }

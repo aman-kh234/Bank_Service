@@ -10,13 +10,13 @@ import com.bank.modal.Npa;
 import com.bank.service.LlcrService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/llcr")
 public class LlcrController {
 
     @Autowired
     private LlcrService llcrServiceImpl;
 
-    @PostMapping("/add/llcr")
+    @PostMapping("/add")
     public Llcr addLlcr(@RequestBody Llcr llcr) {
         return llcrServiceImpl.addLlcr(llcr);
     }

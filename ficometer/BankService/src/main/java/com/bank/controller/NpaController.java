@@ -16,12 +16,12 @@ import com.bank.modal.Npa;
 import com.bank.service.NpaService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/npa")
 public class NpaController {
 	 @Autowired
 	 private NpaService npaServiceImpl;
 
-	    @PostMapping("/add/npa")
+	    @PostMapping("/add")
 	    public Npa addLlcr(@RequestBody Npa npa) {
 	        return npaServiceImpl.addNpa(npa);
 	    }
@@ -31,17 +31,17 @@ public class NpaController {
 	        return npaServiceImpl.getNpaByPeriod();
 	    }
 
-	    @GetMapping("/calculate/npa/latest")
+	    @GetMapping("/calculate/latest")
 	    public double calculateNpaLatest() {
 	        return npaServiceImpl.calculateNpa(getByPeriod());
 	    }
 	    
-	    @GetMapping("/calculate/npa/months/{n}")
+	    @GetMapping("/calculate/months/{n}")
 	    public List<Npa> calculateAllNpa(@PathVariable int n) {
 	        return npaServiceImpl.allNpa(n);
 	    }
 	    
-	    @DeleteMapping("/delete/npa/{id}")
+	    @DeleteMapping("/delete/{id}")
 	    public void deleteNpa(@PathVariable int id) {
 	    	npaServiceImpl.deleteNpa(id);
 	    }

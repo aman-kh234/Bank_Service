@@ -8,18 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.modal.BaseInterest;
 import com.bank.modal.CustomerDto;
-import com.bank.modal.PenaltyFees;
 import com.bank.service.CustomerService;
 import com.bank.service.baseInterest;
-import com.bank.service.penaltyFeesService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/base")
 public class BaseInterestController {
 	@Autowired
 	private baseInterest interestService;

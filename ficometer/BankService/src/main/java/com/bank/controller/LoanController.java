@@ -13,22 +13,22 @@ import com.bank.modal.Loan;
 import com.bank.service.loanService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/loan")
 public class LoanController {
 	@Autowired
 	private loanService loanS;
 	
-	@PostMapping("/add/loan")
+	@PostMapping("/add")
 	private String addLoan(@RequestBody Loan loan) {
 		return loanS.addLoan(loan);
 	}
 	
-	@PutMapping("/update/loan")
+	@PutMapping("/update")
 	private Loan updateLoan(@RequestBody Loan loan) throws Exception {
 		return loanS.updateLoan(loan);
 	}
 	
-	@DeleteMapping("/delete/loan/{id}")
+	@DeleteMapping("/delete/{id}")
 	private void deleteLoan(@PathVariable int id) throws Exception {
 		loanS.deleteLoan(id);
 	}

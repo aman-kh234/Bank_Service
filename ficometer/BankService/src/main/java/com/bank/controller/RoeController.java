@@ -18,12 +18,12 @@ import com.bank.service.RoaService;
 import com.bank.service.RoeService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/roe")
 public class RoeController {
 	@Autowired
 	private RoeService RoeServiceImpl;
 	
-	@PostMapping("/add/roe")
+	@PostMapping("/add")
 	public Roe addRoe(@RequestBody Roe roe) {
 		return RoeServiceImpl.addRoe(roe);
 	}
@@ -33,17 +33,17 @@ public class RoeController {
 		return RoeServiceImpl.getRoeByPeriod();
 	}
 	
-	@GetMapping("/calculate/roe/latest")
+	@GetMapping("/calculate/latest")
 	public double calculateRoeLatest(){
 		return RoeServiceImpl.calculateRoe(getByPeriod());
 	}
 	
-	@DeleteMapping("/delete/roe/{id}")
+	@DeleteMapping("/delete/{id}")
 	public void deleteNsfr(@PathVariable int id) {
 		RoeServiceImpl.deleteRoe(id);
 	}
 	
-	 @GetMapping("/calculate/roe/months/{n}")
+	 @GetMapping("/calculate/months/{n}")
 	    public List<Roe> calculateAllRoe(@PathVariable int n) {
 	        return RoeServiceImpl.allRoe(n);
 	    }

@@ -14,22 +14,22 @@ import com.bank.modal.PenaltyFees;
 import com.bank.service.penaltyFeesService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/penalty")
 public class PenaltyController {
 	@Autowired
 	private penaltyFeesService penaltyService;
 	
-	@PostMapping("/add/penalty")
+	@PostMapping("/add")
 	private String addPenalty(@RequestBody PenaltyFees penaltyFees) {
 		return penaltyService.addPenalty(penaltyFees);
 	}
 	
-	@PutMapping("/update/penalty")
+	@PutMapping("/update")
 	private PenaltyFees updatePenalty(@RequestBody PenaltyFees penaltyFees) throws Exception {
 		return penaltyService.updatePenalty(penaltyFees);
 	}
 	
-	@DeleteMapping("/delete/penalty/{id}")
+	@DeleteMapping("/delete/{id}")
 	private void deletePenalty(@PathVariable int id) throws Exception {
 		penaltyService.deletePenalty(id);
 	}

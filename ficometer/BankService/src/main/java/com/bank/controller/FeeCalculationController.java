@@ -11,7 +11,7 @@ import com.bank.modal.Loan;
 import com.bank.service.FeeCalculationService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/fee")
 public class FeeCalculationController {
 	@Autowired
 	private FeeCalculationService feeCalculationService;
