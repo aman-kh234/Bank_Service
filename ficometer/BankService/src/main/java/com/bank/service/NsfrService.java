@@ -13,4 +13,5 @@ public interface NsfrService {
 	public Nsfr getNsfrByPeriod();
 	public void deleteNsfr(int id);
 	public List<Nsfr> allNsfr(int n);
+	public Nsfr editNsfr(int id, Nsfr updatedNsfr);
 }

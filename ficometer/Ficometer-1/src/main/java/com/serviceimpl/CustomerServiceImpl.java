@@ -45,6 +45,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> getAllCustomer() {
 		return customerRepository.findAll();
 	}
+	
+	
+	@Override  
+    public Long getTotalCustomers() {  
+        return customerRepository.count();  
+    }  
+	
 	@Override
 	public void updateCustomer(Customer customer) {
 	    customerRepository.save(customer);
@@ -75,7 +82,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 		return paymentHistoryScore;
 	}
-
+	
 	@Override
 	public double creditUtilizationScore(List<CreditAccount> creditAccounts) {
 		double totalCreditUsed = 0, totalCreditLimit = 0;
@@ -91,7 +98,7 @@ public class CustomerServiceImpl implements CustomerService {
 		creditUsageScore = Math.max(0, creditUsageScore); // Ensures non-negative value
 		return creditUsageScore;
 	}
-
+	
 	@Override
 	public double accountHistoryScore(List<CreditAccount> creditAccounts) {
 		LocalDate currentDate = LocalDate.now();
@@ -118,7 +125,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	    return creditMixScore;
 	}
-	
 	@Override
 	public double creditInquiriesScore(List<CreditAccount>creditAccounts,Customer customer) {
 		List<CreditEnquiries> creditEnquiries = customer.getCreditEnquiries();
@@ -161,7 +167,6 @@ public class CustomerServiceImpl implements CustomerService {
 				+ creditInquiriesScore;
 		return Math.min(100, Math.max(0, creditScore)); // Ensures score is between 0-100
 	}
-	
 	@Override
 	public String checkCreditHealth(int uid) {
         Customer customer = customerRepository.findById(uid).orElse(null);

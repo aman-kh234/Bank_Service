@@ -9,14 +9,13 @@
 //@Data
 //@NoArgsConstructor
 //@AllArgsConstructor
-//public class PaymentHistoryDto {
+//public class CreditEnquiriesDto {
 //	private int id;
-//	private LocalDate paidOn;
-//	private long amountPaid;
-//	private LocalDate dueDate;
-//	private double minimumEmi;
-//	
-//	 private CreditAccountDto creditAccount;
+//	private int score;
+//	private LocalDate checkedOn;
+//	private String reportLink;
+//	private String review;
+//	private String improvementTips;
 //}
 
 
@@ -34,11 +33,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PaymentHistoryDto implements Serializable {  
+public class CreditEnquiriesDto implements Serializable {  
     private int id;  
-    private LocalDate paidOn;  
-    private long amountPaid;  
-    private LocalDate dueDate;  
-    private double minimumEmi;  
-    private CreditAccountDto creditAccount;  
+    private int score;  
+    private LocalDate checkedOn;  
+    private String reportLink;  
+    private String review;  
+    private String improvementTips;  
 }

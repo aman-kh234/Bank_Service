@@ -1,5 +1,6 @@
 package com.bank.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,7 @@ import com.bank.modal.PenaltyFees;
 public interface lcrRepo extends JpaRepository<Lcr,Integer>{
 	public Lcr findById(int id);
 	
+	public int countByPeriod(LocalDate period);  
 	@Query("SELECT l FROM Lcr l ORDER BY l.period DESC LIMIT 1")
 	public Lcr getLcrByPeriod();
 	

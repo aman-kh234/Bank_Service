@@ -1,5 +1,7 @@
 package com.bank.service;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,4 +29,11 @@ public interface CustomerService {
 
 	@GetMapping("/customer/score/{uid}")
 	public Double getTotalCreditScore(@PathVariable int uid);
+	
+	@GetMapping("/customer/all")  
+	public ResponseEntity<List<CustomerDto>> getAllCustomer();
+	 
+	@GetMapping("/customer/count")  
+	public Long getTotalCustomers();
+	
 }

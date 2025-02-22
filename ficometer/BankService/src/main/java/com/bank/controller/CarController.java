@@ -3,10 +3,12 @@ package com.bank.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.bank.modal.Car;
 import com.bank.modal.Npa;
+import com.bank.modal.Roa;
 import com.bank.service.CarService;
 
 @RestController
@@ -21,6 +23,12 @@ public class CarController {
         return carServiceImpl.addCar(car);
     }
 
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Car> editCar(@PathVariable int id, @RequestBody Car updatedCar) {
+    	Car updated = carServiceImpl.editCar(id, updatedCar);
+        return ResponseEntity.ok(updated);
+    }
+    
     @GetMapping("/get/carByPeriod")
     public Car getByPeriod() {
         return carServiceImpl.getLatestCarByManufactureDate();

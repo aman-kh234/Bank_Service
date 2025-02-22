@@ -1,5 +1,6 @@
 package com.bank.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,8 @@ public interface NpaRepo extends JpaRepository<Npa,Integer>{
 	public Npa findById(int id);
 	@Query("SELECT l FROM Npa l ORDER BY l.period DESC LIMIT 1")
 	public Npa getNpaByPeriod();
-	
+    public int countByPeriod(LocalDate period);
+
 	@Query(value = "SELECT * FROM Npa ORDER BY period DESC LIMIT :n", nativeQuery = true)
 	List<Npa> getNpaByMonthPeriod(@Param("n") int n);
 

@@ -12,4 +12,3 @@ public class AuthResponse {
 	private String message;
 	private Boolean Status;
 }
-

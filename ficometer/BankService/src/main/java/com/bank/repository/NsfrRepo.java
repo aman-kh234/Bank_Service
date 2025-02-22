@@ -1,5 +1,6 @@
 package com.bank.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,7 +16,8 @@ public interface NsfrRepo extends JpaRepository<Nsfr,Integer>{
 	public Nsfr findById(int id);
 	@Query("SELECT l FROM Nsfr l ORDER BY l.period DESC LIMIT 1")
 	public Nsfr getNsfrByPeriod();
-	
+    public int countByPeriod(LocalDate period);
+
 	@Query(value = "SELECT * FROM Nsfr ORDER BY period DESC LIMIT :n", nativeQuery = true)
 	List<Nsfr> getNsfrByMonthPeriod(@Param("n") int n);
 }

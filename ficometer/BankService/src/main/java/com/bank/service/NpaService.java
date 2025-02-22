@@ -13,4 +13,5 @@ public interface NpaService {
     public Npa getNpaByPeriod();
     public void deleteNpa(int id);
     public List<Npa> allNpa(int n);
+	public Npa editNpa(int id, Npa updatedNpa);
 }

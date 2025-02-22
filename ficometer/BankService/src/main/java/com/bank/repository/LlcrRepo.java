@@ -1,5 +1,6 @@
 package com.bank.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +17,8 @@ public interface LlcrRepo extends JpaRepository<Llcr,Integer>{
 	public Llcr findById(int id);
 	@Query("SELECT l FROM Llcr l ORDER BY l.period DESC LIMIT 1")
 	public Llcr getLlcrByPeriod();
-	
+    public int countByPeriod(LocalDate period);
+
 	@Query(value = "SELECT * FROM Llcr ORDER BY period DESC LIMIT :n", nativeQuery = true)
 	List<Llcr> getLlcrByMonthPeriod(@Param("n") int n);
 

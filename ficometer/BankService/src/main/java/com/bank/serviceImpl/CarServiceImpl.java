@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bank.exception.DataAlreadyExistsException;
+import com.bank.exception.DataNotFoundException;
 import com.bank.modal.Car;
 import com.bank.repository.CarRepo;
 import com.bank.service.CarService;
@@ -28,7 +30,15 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car addCar(Car car) {
-        return carRepository.save(car);
+//        return carRepository.save(car);
+        
+        int count = carRepository.countByPeriod(car.getPeriod());  
+	      
+	    if (count > 0) {  
+	        throw new DataAlreadyExistsException("Data for period " + car.getPeriod() + " already exists. You can only modify it.");  
+	    }  
+	      
+	    return carRepository.save(car); 
     }
 
     @Override
@@ -38,11 +48,26 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void deleteCar(int id) {
+    	if (!carRepository.existsById(id)) {
+            throw new DataNotFoundException("Car with ID " + id + " not found.");
+        }
         carRepository.deleteById(id);
     }
 
 	@Override
 	public List<Car> allCar(int n) {
 		return carRepository.getCarByMonthPeriod(n);
+	}
+
+	@Override
+	public Car editCar(int id, Car updatedCar) {
+		if (!carRepository.existsById(id)) {
+            throw new DataNotFoundException("Llcr with ID " + id + " not found.");
+        }
+
+		updatedCar.setId(id); // Ensure the ID remains the same
+       return carRepository.save(updatedCar);
+		
+
 	}
 }

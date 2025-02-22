@@ -1,5 +1,6 @@
 package com.bank.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,7 @@ import com.bank.modal.Npa;
 public interface CarRepo extends JpaRepository<Car, Integer> {
 
     public Car findById(int id);
-
+    public int countByPeriod(LocalDate period);
     @Query("SELECT c FROM Car c ORDER BY c.period DESC LIMIT 1")
     public Car getLatestCarByManufactureDate();
     

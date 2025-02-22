@@ -8,5 +8,5 @@ import com.bank.modal.PenaltyFees;
 
 @Service
 public interface FeeCalculationService {
-	public double fee_calculated(Loan loan);
+	public double fee_calculated(String jwt,Loan loan);
 }

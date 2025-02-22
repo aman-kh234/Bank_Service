@@ -12,4 +12,5 @@ public interface LlcrService {
     public Llcr getLlcrByPeriod();
     public void deleteLlcr(int id);
     public List<Llcr> allLlcr(int n);
+	public Llcr editLlcr(int id, Llcr updatedLlcr);
 }

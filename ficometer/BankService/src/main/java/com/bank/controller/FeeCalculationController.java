@@ -3,6 +3,7 @@ package com.bank.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ public class FeeCalculationController {
 	private FeeCalculationService feeCalculationService;
 	
 	@PostMapping("/calculate")
-    public double calculateLoanInterest(@RequestBody Loan request) {
-        return feeCalculationService.fee_calculated(request);
+    public double calculateLoanInterest(@RequestHeader("Authorization") String jwt ,@RequestBody Loan request) {
+        return feeCalculationService.fee_calculated(jwt,request);
     }
 }

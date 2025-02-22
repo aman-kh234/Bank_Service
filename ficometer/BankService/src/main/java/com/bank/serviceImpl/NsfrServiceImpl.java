@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bank.exception.DataAlreadyExistsException;
+import com.bank.exception.DataNotFoundException;
 import com.bank.modal.Lcr;
 import com.bank.modal.Nsfr;
 import com.bank.repository.NsfrRepo;
@@ -28,7 +30,15 @@ public class NsfrServiceImpl implements NsfrService{
 
 	@Override
 	public Nsfr addNsfr(Nsfr nsfr) {
-		return NsfrRepository.save(nsfr);
+//		return NsfrRepository.save(nsfr);
+		
+		int count = NsfrRepository.countByPeriod(nsfr.getPeriod());  
+	      
+	    if (count > 0) {  
+	        throw new DataAlreadyExistsException("Data for period " + nsfr.getPeriod() + " already exists. You can only modify it.");  
+	    }  
+	      
+	    return NsfrRepository.save(nsfr); 
 	}
 
 	@Override
@@ -38,12 +48,27 @@ public class NsfrServiceImpl implements NsfrService{
 
 	@Override
 	public void deleteNsfr(int id) {
+		if (!NsfrRepository.existsById(id)) {
+            throw new DataNotFoundException("NSFR with ID " + id + " not found.");
+        }
 		NsfrRepository.deleteById(id);
 	}
 
 	@Override
 	public List<Nsfr> allNsfr(int n) {
 		return NsfrRepository.getNsfrByMonthPeriod(n);
+	}
+
+	@Override
+	public Nsfr editNsfr(int id, Nsfr updatedNsfr) {
+		// TODO Auto-generated method stub
+		 if (!NsfrRepository.existsById(id)) {
+	            throw new DataNotFoundException("Nsfr with ID " + id + " not found.");
+	        }
+
+		 updatedNsfr.setId(id); // Ensure the ID remains the same
+	       return NsfrRepository.save(updatedNsfr);
+		
 	}
 	
 }

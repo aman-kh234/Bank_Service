@@ -13,4 +13,5 @@ public interface RoeService {
 	public Roe getRoeByPeriod();
 	public void deleteRoe(int id);
 	public List<Roe> allRoe(int n);
+	public Roe editRoe(int id, Roe updatedRoe);
 }

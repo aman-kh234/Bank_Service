@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bank.exception.DataAlreadyExistsException;
+import com.bank.exception.DataNotFoundException;
 import com.bank.modal.Npa;
 import com.bank.repository.NpaRepo;
 import com.bank.service.NpaService;
@@ -16,7 +18,15 @@ public class NpaServiceImpl implements NpaService{
 	
 	@Override
 	public Npa addNpa(Npa npa) {
-		return npaRepository.save(npa);
+//		return npaRepository.save(npa);
+		
+		int count = npaRepository.countByPeriod(npa.getPeriod());  
+	      
+	    if (count > 0) {  
+	        throw new DataAlreadyExistsException("Data for period " + npa.getPeriod() + " already exists. You can only modify it.");  
+	    }  
+	      
+	    return npaRepository.save(npa); 
 	}
 
 	@Override
@@ -36,12 +46,25 @@ public class NpaServiceImpl implements NpaService{
 
 	@Override
 	public void deleteNpa(int id) {
+		 if (!npaRepository.existsById(id)) {
+	            throw new DataNotFoundException("Npa with ID " + id + " not found.");
+	        }
 		npaRepository.deleteById(id);
 	}
 
 	@Override
 	public List<Npa> allNpa(int n) {
 		return npaRepository.getNpaByMonthPeriod(n);
+	}
+
+	@Override
+	public Npa editNpa(int id, Npa updatedNpa) {
+		if (!npaRepository.existsById(id)) {
+            throw new DataNotFoundException("Nsfr with ID " + id + " not found.");
+        }
+
+		updatedNpa.setId(id); // Ensure the ID remains the same
+       return npaRepository.save(updatedNpa);
 	}
 	
 }

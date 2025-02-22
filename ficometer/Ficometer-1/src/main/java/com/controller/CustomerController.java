@@ -59,7 +59,7 @@ public class CustomerController {
 		if(customer==null) {
 			throw new Exception("Customer does not exist");
 		}
-		customerService.deleteCustomerById(customer.getId());
+		customerService.deleteCustomerById(id);
 	}
 
 	@GetMapping("/all")
@@ -70,7 +70,14 @@ public class CustomerController {
 		}
 		return customerService.getAllCustomer();
 	}
-////////////////////////////////////////////CREDIT 
+	
+	
+	@GetMapping("/count")  
+    public Long getTotalCustomers() {  
+        return customerService.getTotalCustomers();  
+    }  
+	
+    //CREDIT 
 	@PostMapping("/add/credit")
 	public ResponseEntity<CreditAccount> addCredit(@RequestHeader("Authorization") String jwt, @RequestBody CreditAccount creditAccount) throws Exception {
 		Customer customer = userService.getUserProfile(jwt);
@@ -104,7 +111,7 @@ public class CustomerController {
 	    customerService.updateCustomer(customer);
 	    return ResponseEntity.ok(customer);
 	}
-
+	
 	@PostMapping("/update/payment-history/{creditAccountId}")
 	public ResponseEntity<CreditAccount> updatePaymentHistory(@RequestHeader("Authorization") String jwt,@PathVariable int creditAccountId, @RequestBody PaymentHistory payment) throws Exception {
 		Customer customer = userService.getUserProfile(jwt);
@@ -119,6 +126,7 @@ public class CustomerController {
 	    creditService.addCredit(creditAccount);
 	    return ResponseEntity.ok(creditAccount);
 	}
+
 
 	
 
@@ -166,7 +174,7 @@ public class CustomerController {
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(customerService.creditUtilizationScore(customer.getCreditAccount()));
 	}
-
+	
 	@GetMapping("/credit-health")
 	public ResponseEntity<String> getCreditHealthWarning(@RequestHeader("Authorization") String jwt) throws Exception {
 		Customer customer = userService.getUserProfile(jwt);

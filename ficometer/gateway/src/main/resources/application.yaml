@@ -13,7 +13,7 @@ spring:
         uri:
           lb://BANK-SERVICE
         predicates:
-        - Path=/auth/bank/**,/base/**,/car/**,/fee/**,/lcr/**,/llcr/**,/loan/**,/npa/**
+        - Path=/auth/bank/**,/base/**,/car/**,/fee/**,/lcr/**,/llcr/**,/loan/**,/npa/**,/bank/customer/**
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
       globalcors:

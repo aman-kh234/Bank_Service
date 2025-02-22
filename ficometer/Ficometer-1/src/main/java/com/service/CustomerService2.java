@@ -47,7 +47,7 @@ public class CustomerService2 {
 
         return customerRepository.save(input);
     }
-
+	
     public List<Customer> allUsers() {
         List<Customer> users = new ArrayList();
         customerRepository.findAll().forEach(users::add);

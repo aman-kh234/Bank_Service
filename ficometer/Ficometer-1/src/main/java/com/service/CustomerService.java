@@ -22,6 +22,8 @@ public interface CustomerService {
 
 	public double checkCreditScore(int uid);
 
+	public Long getTotalCustomers();
+	
 	public void updateCustomer(Customer customer);
 
 	public double paymentHistoryScore(List<CreditAccount> creditAccounts);
@@ -35,5 +37,6 @@ public interface CustomerService {
 	public double creditInquiriesScore(List<CreditAccount> creditAccounts, Customer customer);
 
 	public double creditMixScore(List<CreditAccount> creditAccounts);
+	
 	
 }
